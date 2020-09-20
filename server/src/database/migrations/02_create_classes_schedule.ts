@@ -5,9 +5,9 @@ export async function up(knex: Knex) {
     return knex.schema.createTable('class_schedule', table => {
         table.increments('id').primary();
         
-        table.integer('dia_da_semana').notNullable();
-        table.integer('horario_abertura').notNullable();
-        table.integer('horario_encerramento').notNullable();
+        table.integer('week_day').notNullable();
+        table.integer('from').notNullable();
+        table.integer('to').notNullable();
         
         //relacionamento FK
         table.integer('class_id')
