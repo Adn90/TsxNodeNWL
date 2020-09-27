@@ -9,7 +9,8 @@ import './styles.css';
 
 // forma de passar databind no react
 interface PageHeaderProps {
-    title: string,
+    title: string;
+    description?: string;
 }
 
 // React.FC function component <Generic em typescript>
@@ -27,6 +28,9 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
 
                 <div className="header-content">
                     <strong> {props.title} </strong>
+                    {/*  &&  = truthy. A condição vai ser executada se a 1ª parte for verdadeira */}
+                    {/* truthy != null, 0, undifened , "" */}
+                    { props.description && <p>{ props.description }</p> }
 
                     {props.children}
                 </div>
