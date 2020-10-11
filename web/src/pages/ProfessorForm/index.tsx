@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Input from '../../componentes/Input/input';
 import PageHeader from '../../componentes/PageHeader';
 import Textarea from '../../componentes/Textarea/textarea';
@@ -10,10 +10,30 @@ import warningIcon from '../../assets/images/icons/warning.svg';
 
 
 function ProfessorForm() {
-    const scheduleItens = [
-        { week_day: 0, from: '8:00 AM', to: '4:00 PM' },
-        { week_day: 0, from: '10:00 AM', to: '6:00 PM' },
-    ];
+    //estados no React: Para cada objeto deste array, será gerado scheduleItem do professor
+    // nesse projeto, uma pessoa só pode ter 1 horário por dia
+    // React não fica observando vars comuns, para isso, ele precisa do UseState **
+    // Com o UseState, modificações em vars, feito o scheduleItems, vão ser refletidas no layout
+    // UseState retorna 2 coisas, os dados a serem trabalhados e uma função, por isso é melhor utilizar desestruturação (ver tips da func)
+    const [scheduleItems, setScheduleItems] = useState([
+        { week_day: 0, from: '',  to: '', }
+    ]);
+  
+    function addNewScheduleItem() {
+        //React rabalha com imutabilidade, então para modificar o scheduleItems, 1ª vc copia os dados e depois add os novos dados
+        setScheduleItems([
+            ...scheduleItems, // forma mais simples de copiar um array em JS
+            { week_day: 0, from: '',  to: '', }
+        ]);
+        
+        // dar um push não funciona pelo motivo do react não observar vars normais sem o useState **
+        /* scheduleItems.push({
+            week_day: 0,
+            from: '',
+            to: '',
+        }); */
+    }
+
     return (
         <div id="page-teacher-form" className="container">
             <PageHeader
@@ -53,26 +73,31 @@ function ProfessorForm() {
                 <fieldset>
                     <legend>
                         Horários Disponíveis
-                        <button type="button">+ Novo Horário</button>
+                        <button type="button" onClick={addNewScheduleItem}>+ Novo Horário</button>
                     </legend>
-                    <div className="schedule-item">
-                        <Select
-                            name="week_day"
-                            label="Dia da Semana"
-                            options={[
-                                { value: '0', label: 'Domingo' },
-                                { value: '1', label: 'Segunda-Feira' },
-                                { value: '2', label: 'Terça-Feira' },
-                                { value: '3', label: 'Quarta-Feira' },
-                                { value: '4', label: 'Quinta-Feira' },
-                                { value: '5', label: 'Sexta-Feira' },
-                                { value: '6', label: 'Sábado' },
+                    {scheduleItems.map(scheduleItem => {
+                        return (
+                            /* key é necessária para distinguir cada bloco de schedule-item */
+                            <div key={scheduleItem.week_day} className="schedule-item">
+                                <Select
+                                    name="week_day"
+                                    label="Dia da Semana"
+                                    options={[
+                                        { value: '0', label: 'Domingo' },
+                                        { value: '1', label: 'Segunda-Feira' },
+                                        { value: '2', label: 'Terça-Feira' },
+                                        { value: '3', label: 'Quarta-Feira' },
+                                        { value: '4', label: 'Quinta-Feira' },
+                                        { value: '5', label: 'Sexta-Feira' },
+                                        { value: '6', label: 'Sábado' },
 
-                            ]}
-                        />
-                        <Input name="from" label="Das" type="time" />
-                        <Input name="to" label="Até" type="time" />
-                    </div>
+                                    ]}
+                                />
+                                <Input name="from" label="Das" type="time" />
+                                <Input name="to" label="Até" type="time" />
+                            </div>
+                        );
+                    })}
                 </fieldset>
 
                 <footer>
