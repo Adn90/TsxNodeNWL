@@ -49,7 +49,7 @@ function ProfessorForm() {
 
     function setScheduleItemsValue(position: number, field: string, value: string) {
         const updatedScheduleItems = scheduleItems.map((scheduleItem, index) => { // map pecorre o array e o retorna com as modificações com o mesmo tamanho
-            if (index == position) {
+            if (index === position) {
                 //setScheduleItemsValue(0, 'week_day', '2')
                 // retorna todo o scheduleItem
                 // [field] é uma forma de modificar um dos campos do objeto, vem em [] p/ não fazer com que field vire uma propriedade do objeto
