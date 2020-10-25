@@ -1,8 +1,8 @@
 Arguments: 
-  D:\Arquivos de Programas\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add expo-font@~8.3.0 @expo-google-fonts/archivo @expo-google-fonts/poppings
+  D:\Arquivos de Programas\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @react-navigation/native
 
 PATH: 
-  C:\Python38\Scripts\;C:\Python38\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Microsoft VS Code\bin;D:\Arquivos de Programas\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Yarn\bin\;C:\Users\Pichau\AppData\Local\Microsoft\WindowsApps;C:\Users\Pichau\AppData\Local\Yarn\bin
+  C:\Python38\Scripts\;C:\Python38\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Microsoft VS Code\bin;D:\Arquivos de Programas\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Yarn\bin\;C:\Users\adoni\AppData\Local\Microsoft\WindowsApps;C:\Users\adoni\AppData\Roaming\npm;C:\Users\adoni\AppData\Local\Programs\Git\cmd
 
 Yarn version: 
   1.22.5
@@ -14,17 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@expo-google-fonts%2fpoppings: Not found
-      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66097:18)
-      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140749:22)
-      at Request.emit (events.js:315:20)
-      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141721:10)
-      at Request.emit (events.js:315:20)
-      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141643:12)
-      at Object.onceWrapper (events.js:421:28)
-      at IncomingMessage.emit (events.js:327:22)
-      at endReadableNT (_stream_readable.js:1221:12)
-      at processTicksAndRejections (internal/process/task_queues.js:84:21)
+  Error: EPERM: operation not permitted, unlink 'D:\Documentos\NLM\mobile\node_modules\@babel\generator\node_modules\.bin'
 
 npm manifest: 
   {
@@ -37,7 +27,9 @@ npm manifest:
       "eject": "expo eject"
     },
     "dependencies": {
+      "@expo-google-fonts/archivo": "^0.1.0",
       "@expo-google-fonts/inter": "^0.1.0",
+      "@expo-google-fonts/poppins": "^0.1.0",
       "expo": "~39.0.2",
       "expo-font": "~8.3.0",
       "expo-status-bar": "~1.0.2",
@@ -1068,10 +1060,20 @@ Lockfile:
       exec-sh "^0.3.2"
       minimist "^1.2.0"
   
+  "@expo-google-fonts/archivo@^0.1.0":
+    version "0.1.0"
+    resolved "https://registry.yarnpkg.com/@expo-google-fonts/archivo/-/archivo-0.1.0.tgz#3ed76d5ef3c6ceb711646fda0a5e6eeda8d08def"
+    integrity sha512-OWevCTcQOKDJHWpLbnDEonGSbs4RjxrahbQY/n7XdZm+ys0NQkdk9mL2m4+Ivpi3RYsJRaWv5ISNCi00OjmfcA==
+  
   "@expo-google-fonts/inter@^0.1.0":
     version "0.1.0"
     resolved "https://registry.yarnpkg.com/@expo-google-fonts/inter/-/inter-0.1.0.tgz#399f068437824fcbf6aa3da5fcf490dba2af85a3"
     integrity sha512-Y6GCqsUX6JwexQ2wmBkMiJBY6M2GpNQRTczzIGbBGhXWQxqGmP5awRcf0ZJV+OlLeJcKAzas/TW45ZLdpG3yzA==
+  
+  "@expo-google-fonts/poppins@^0.1.0":
+    version "0.1.0"
+    resolved "https://registry.yarnpkg.com/@expo-google-fonts/poppins/-/poppins-0.1.0.tgz#aae4df9e80d68ec9dc6764e57dc931f1f64016cd"
+    integrity sha512-iC8ii7hYyK22N3ivvLyIspLQ0D4dn1mB+llhYnUCr/h/QfwUWyEosq1uWiwNC47yCedsiPiZ99vJSfpYRjBDrA==
   
   "@expo/configure-splash-screen@0.2.0":
     version "0.2.0"

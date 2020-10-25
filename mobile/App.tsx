@@ -1,9 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import Landing from './src/pages/Landing';
+import { StatusBar } from 'expo-status-bar';
 import { AppLoading } from 'expo';
 import { Archivo_400Regular, Archivo_700Bold, useFonts } from '@expo-google-fonts/archivo'; // useFonts é preciso importar em pelo menos 1 para fazer o carregamento 
 import { Poppins_400Regular, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
+
+import AppStack from './src/routes/AppStack';
 
 
 export default function App() {
@@ -21,7 +22,7 @@ export default function App() {
       /*<> é um 'fragment'. Em react, não se pode retornar de dentro de um componentes, dois elementos sem nada em volta, 
         <> basicamente faz esse trabalho, mas sem add um elemento visual na tela, como <View /> por exemplo*/
       <>
-        <Landing />
+        <AppStack />
         <StatusBar style="light" />
       </>
     );
