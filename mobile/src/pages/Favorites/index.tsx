@@ -1,13 +1,33 @@
-import React from 'react';
+import AsyncStorage from '@react-native-community/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import PageHeader from '../../components/PageHeader';
-import TeacherItem from '../../components/TeacherItem';
+import TeacherItem, { Teacher } from '../../components/TeacherItem';
 
 import styles from './styles';
 
 function TeacherList() {
+    const [favorites, setFavorites] = useState([]);
+    
+    function loadFavorites() {
+        // AsyncStorage não é um tipo de BD relacional, ele só salva texto
+        AsyncStorage.getItem('favorites').then(response => {
+            if (response) { // vai voltar como texto
+               const favoritedTeachers = JSON.parse(response);
+               
+               setFavorites(favoritedTeachers);
+            }  
+        });
+    }
+
+    // sempre vai ser carregado quando a tela entrar em foco
+    useFocusEffect(() => {
+        loadFavorites()
+    });
+
     return ( 
         <View style={styles.container} >
             <PageHeader title="Meus proffys favoritos" />
@@ -21,11 +41,15 @@ function TeacherList() {
                     paddingBottom: 16,
                 }}
             >
-                <TeacherItem />
-                <TeacherItem />
-                <TeacherItem />
-                <TeacherItem />
-                <TeacherItem />
+                {favorites.map((teacher: Teacher) => {
+                    return (
+                        <TeacherItem
+                            key={teacher.id}
+                            teacher={teacher}
+                            favorited // == favorited={true}
+                        />
+                    )
+                })}
             </ScrollView>
         </View>
     );

@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { BorderlessButton, RectButton, ScrollView, TextInput } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-community/async-storage';
 import { Feather } from '@expo/vector-icons';
+
 import api from '../../services/api';
 
 import PageHeader from '../../components/PageHeader';
 import TeacherItem, { Teacher    } from '../../components/TeacherItem';
 
 import styles from './styles';
+import { useFocusEffect } from '@react-navigation/native';
+
 
 
 function TeacherList() {
@@ -15,14 +19,16 @@ function TeacherList() {
     const [subject, setSubject] = useState('');
     const [week_day, setWeek_day] = useState('');
     const [time, setTime] = useState('');
-
+    
     const [teachers, setTeachers] = useState([]);
+    const [favorites, setFavorites] = useState<number[]>([]);
 
     function handleToggleFiltersVisible() {
         setIsFilterVisible(!isFilterVisible);
     }
 
     async function handleFilterSubmit() {
+        loadFavorites();
         const response = await api.get('classes', {
             params: {
                 subject,
@@ -32,7 +38,20 @@ function TeacherList() {
         });
         console.log(response);
         setTeachers(response.data);
-    }    
+    }
+
+    function loadFavorites() {
+        // AsyncStorage não é um tipo de BD relacional, ele só salva texto
+        AsyncStorage.getItem('favorites').then(response => {
+            if (response) { // vai voltar como texto
+               const favoritedTeachers = JSON.parse(response);
+               const favoritedTeachersIds = favoritedTeachers.map((teacher: Teacher) => {
+                   return teacher.id;
+               });
+               setFavorites(favoritedTeachersIds);
+            }  
+        });
+    }
 
     return ( 
         <View style={styles.container} >
@@ -96,7 +115,12 @@ function TeacherList() {
                 }}
             >
                 {teachers.map((teacher: Teacher)  => {
-                   return <TeacherItem key={teacher.id} teacher={teacher} />
+                   return (
+                   <TeacherItem 
+                        key={teacher.id} 
+                        teacher={teacher} 
+                        favorited={favorites.includes(teacher.id)}
+                   />)
                 })}                
             </ScrollView> 
         </View>
